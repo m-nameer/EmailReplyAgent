@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     if (!token) {
       router.replace("/login");
     }
-  }, [token]);
+  }, [token, router]);
 
   if (!isClient || !token) return null;
   return <>{children}</>;

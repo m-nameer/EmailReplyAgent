@@ -17,8 +17,10 @@ export default function RegisterPage() {
       console.log("api: ",api)
       await api().post("/register", { email, password, name });
       router.push("/login");
-    } catch (err: any) {
-      setError(err.response?.data?.detail || "Registration failed");
+    } catch (err: unknown) {
+      // setError(err.response?.data?.detail || "Registration failed");
+      const error = err as { response?: { data?: { detail?: string } } };
+      setError(error.response?.data?.detail || "Registration failed");
     }
   };
 

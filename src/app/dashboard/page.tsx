@@ -11,14 +11,14 @@ export default function DashboardPage() {
   const [gmailConnected, setGmailConnected] = useState(false);
   const [agentEnabled, setAgentEnabled] = useState(false);
   const [loading, setLoading] = useState(true); // ⏳
-  const [authenticated, setAuthenticated] = useState(false); // ✅
+  // const [authenticated, setAuthenticated] = useState(false); // ✅
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userRes = await api().get("/me");
         setEmail(userRes.data.email);
-        setAuthenticated(true);
+        // setAuthenticated(true);
 
         const agentRes = await api().get("/agent/status");
         setAgentEnabled(agentRes.data.enabled);
@@ -52,7 +52,7 @@ export default function DashboardPage() {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, []);
+  }, [router]);
 
 
 
@@ -68,7 +68,9 @@ export default function DashboardPage() {
 
   const connectGmail = async () => {
     const res = await api().get("/email/authorize");
-    const popup = window.open(res.data.auth_url, "_blank", "width=500,height=600");
+    // const popup = window.open(res.data.auth_url, "_blank", "width=500,height=600");
+    window.open(res.data.auth_url, "_blank", "width=500,height=600");
+
   };
 
   //   window.addEventListener("message", (event) => {
@@ -174,7 +176,7 @@ export default function DashboardPage() {
           {whatsappQR && (
             <div className="mt-2">
               <p>Scan this QR in WhatsApp:</p>
-              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(whatsappQR)}`} />
+              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(whatsappQR)}`} alt="WhatsApp QR code"/>
             </div>
           )}
 
