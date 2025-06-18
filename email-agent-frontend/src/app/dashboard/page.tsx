@@ -38,7 +38,9 @@ export default function DashboardPage() {
     const handleMessage = (event: MessageEvent) => {
       // ✅ Accept origin from backend (where popup runs)
       if (
-        event.origin === "http://localhost:8000" &&
+        // event.origin === "http://localhost:8000" &&
+        // event.data?.type === "gmail_connected"
+        event.origin === "https://2803-39-48-219-229.ngrok-free.app" &&
         event.data?.type === "gmail_connected"
       ) {
         api()
